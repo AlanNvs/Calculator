@@ -29,7 +29,7 @@ function populateDisplay(numbersArray) {
   display.textContent = numbersArray.join('');
 }
 
-function eventButtons() {
+function numbersButtons() {
   const number = document.querySelectorAll('.number');
   const firstArray = [];
 
@@ -39,14 +39,24 @@ function eventButtons() {
       populateDisplay(firstArray);
     });
   });
-
-/*   btn0.addEventListener('click', () => {
-    firstArray.push(0);
-    display.textContent = firstArray.join('');
-  });
-  btn1.addEventListener('click', () => {
-    firstArray.push(btn1.textContent.valueOf());
-    display.textContent = firstArray.join('');
-  }); */
+  return firstArray;
 }
-eventButtons();
+function operatorButtons() {
+  const operator = document.querySelectorAll('.operator');
+  let operation = '';
+
+  const numberArray = numbersButtons();
+  operator.forEach(operator => {
+    operator.addEventListener('click', () => {
+      numberArray.length = 0;
+      if(operation.length === 0) {
+        operation = operator.textContent.valueOf();
+      } else {
+        operation = '';
+        operation = operator.textContent.valueOf();
+      }
+    });
+  });
+  return operation;
+}
+operatorButtons();
