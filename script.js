@@ -28,7 +28,10 @@ function populateDisplay(numbersArray) {
   const display = document.querySelector('.display');
   display.textContent = numbersArray.join('');
 }
-
+function clear() {
+  const numberArray = numbersButtons();
+  numberArray.length = 0;
+}
 function numbersButtons() {
   const number = document.querySelectorAll('.number');
   const firstArray = [];
@@ -44,11 +47,12 @@ function numbersButtons() {
 function operatorButtons() {
   const operator = document.querySelectorAll('.operator');
   let operation = '';
-
-  const numberArray = numbersButtons();
+  numbersButtons();
+  //const numberArray = numbersButtons();
   operator.forEach(operator => {
     operator.addEventListener('click', () => {
-      numberArray.length = 0;
+      clear();
+      //numberArray.length = 0;
       if(operation.length === 0) {
         operation = operator.textContent.valueOf();
       } else {
@@ -59,4 +63,11 @@ function operatorButtons() {
   });
   return operation;
 }
-operatorButtons();
+function getOperations() {
+  const equal = document.querySelector('.equal');
+  let firstNumber = parseInt(numbersButtons().join(''));
+  console.log(firstNumber);
+
+}
+//operatorButtons();
+result();
