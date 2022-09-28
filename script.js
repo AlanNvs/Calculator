@@ -24,3 +24,29 @@ function operate(a, b, operator) {
       return divide(a, b);
   }
 }
+function populateDisplay(numbersArray) {
+  const display = document.querySelector('.display');
+  display.textContent = numbersArray.join('');
+}
+
+function eventButtons() {
+  const number = document.querySelectorAll('.number');
+  const firstArray = [];
+
+  number.forEach(number => {
+    number.addEventListener('click', () => {
+      firstArray.push(number.textContent.valueOf());
+      populateDisplay(firstArray);
+    });
+  });
+
+/*   btn0.addEventListener('click', () => {
+    firstArray.push(0);
+    display.textContent = firstArray.join('');
+  });
+  btn1.addEventListener('click', () => {
+    firstArray.push(btn1.textContent.valueOf());
+    display.textContent = firstArray.join('');
+  }); */
+}
+eventButtons();
