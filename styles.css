@@ -1,0 +1,20 @@
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 250px;
+  height: 250px;
+}
+.display {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 1;
+  border: 1px solid rebeccapurple;
+  font-size: 35px;
+}
+.buttonDivs {
+  flex-grow: 3;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
