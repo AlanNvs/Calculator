@@ -50,11 +50,20 @@ function calcButtons() {
 
     operator.forEach(operator => {
       operator.addEventListener('click', () => {
-        firstOperand = +numberArray.join('');
-        numberArray.length = 0;
         if(operation.length === 0) {
           operation = operator.textContent.valueOf();
+          firstOperand = +numberArray.join('');
+          numberArray.length = 0;
         } else {
+          console.log(firstOperand, +numberArray.join(''), operation);
+          let result = operate(firstOperand, +numberArray.join(''), operation);
+          console.log(result);
+          firstOperand = result;
+          console.log(firstOperand);
+          numberArray.length = 0;
+          numberArray.push(result);
+          populateDisplay(numberArray);
+          numberArray.length = 0;
           operation = '';
           operation = operator.textContent.valueOf();
         }
