@@ -26,48 +26,54 @@ function operate(a, b, operator) {
 }
 function populateDisplay(numbersArray) {
   const display = document.querySelector('.display');
-  display.textContent = numbersArray.join('');
+    display.textContent = +numbersArray.join('');
 }
-function clear() {
-  const numberArray = numbersButtons();
-  numberArray.length = 0;
+function clear(numberDisplay) {
+  numberDisplay.length = 0;
 }
-function numbersButtons() {
+
+function calcButtons() {
   const number = document.querySelectorAll('.number');
-  const firstArray = [];
-
-  number.forEach(number => {
-    number.addEventListener('click', () => {
-      firstArray.push(number.textContent.valueOf());
-      populateDisplay(firstArray);
-    });
-  });
-  return firstArray;
-}
-function operatorButtons() {
-  const operator = document.querySelectorAll('.operator');
+  const numberArray = [];
   let operation = '';
-  numbersButtons();
-  //const numberArray = numbersButtons();
-  operator.forEach(operator => {
-    operator.addEventListener('click', () => {
-      clear();
-      //numberArray.length = 0;
-      if(operation.length === 0) {
-        operation = operator.textContent.valueOf();
-      } else {
-        operation = '';
-        operation = operator.textContent.valueOf();
-      }
+  let firstOperand;
+  function getFirstNumber() {
+    number.forEach(number => {
+      number.addEventListener('click', () => {
+        numberArray.push(number.textContent);
+        populateDisplay(numberArray);
+      });
     });
-  });
-  return operation;
-}
-function getOperations() {
-  const equal = document.querySelector('.equal');
-  let firstNumber = parseInt(numbersButtons().join(''));
-  console.log(firstNumber);
+  }
+  function operatorButtons() {
+    const operator = document.querySelectorAll('.operator');
 
+    operator.forEach(operator => {
+      operator.addEventListener('click', () => {
+        firstOperand = +numberArray.join('');
+        numberArray.length = 0;
+        if(operation.length === 0) {
+          operation = operator.textContent.valueOf();
+        } else {
+          operation = '';
+          operation = operator.textContent.valueOf();
+        }
+      });
+    });
+  }
+  function calculate() {
+    const equal = document.querySelector('.equal');
+    equal.addEventListener('click', () => {
+      console.log(firstOperand, +numberArray.join(''), operation);
+      let result = operate(firstOperand, +numberArray.join(''), operation);
+      console.log(result);
+      numberArray.length = 0;
+      numberArray.push(result);
+      populateDisplay(numberArray);
+    });
+  }
+  getFirstNumber();
+  operatorButtons();
+  calculate();
 }
-//operatorButtons();
-result();
+calcButtons();
