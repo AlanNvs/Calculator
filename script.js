@@ -72,14 +72,25 @@ function calcButtons() {
   }
   function calculate() {
     const equal = document.querySelector('.equal');
-    equal.addEventListener('click', () => {
-      console.log(firstOperand, +numberArray.join(''), operation);
-      let result = operate(firstOperand, +numberArray.join(''), operation);
-      console.log(result);
-      numberArray.length = 0;
-      numberArray.push(result);
-      populateDisplay(numberArray);
-    });
+    console.log(firstOperand, numberArray, operation);
+
+      equal.addEventListener('click', () => {
+        if((firstOperand === undefined) || (numberArray.length === 0) || (operation === '')) {
+
+        } else {
+          console.log(firstOperand, +numberArray.join(''), operation);
+          let result = operate(firstOperand, +numberArray.join(''), operation);
+          console.log(result);
+          firstOperand = result;
+          console.log(firstOperand);
+          numberArray.length = 0;
+          numberArray.push(result);
+          populateDisplay(numberArray);
+          numberArray.length = 0;
+        }
+      });
+    
+
   }
   getFirstNumber();
   operatorButtons();
